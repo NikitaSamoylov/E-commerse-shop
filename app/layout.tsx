@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { HeaderDefault } from "@/components/header-default/index.js"; 
 import "./globals.scss";
 
-const inter = Inter({ subsets: ["latin"], weight: ['300', '400', '700'] });
+export const inter = Inter({ subsets: ["latin"], weight: ['300', '400', '700'] });
 
 export const metadata: Metadata = {
   title: "Electronix",

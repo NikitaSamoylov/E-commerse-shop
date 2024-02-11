@@ -3,7 +3,10 @@
     align-items: center;
     justify-content: end;
 
+    &__item {
+        font-weight: 400;
+    }
     &__item:not(:last-child) {
-        margin-right: 14px;
+        margin-right: 16px;
     }
 }

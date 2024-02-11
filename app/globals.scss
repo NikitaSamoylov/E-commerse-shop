@@ -10,6 +10,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   color: rgb(19, 18, 18);
+  font-weight: 400;
   // margin: 0 auto;
 }
 
@@ -27,9 +28,14 @@ a {
   text-decoration: none;
 }
 
+input {
+  outline: none;
+}
+
 .container {
   max-width: 1155px;
   margin: 0 auto;
+  padding: 0 15px;
 }
 
 

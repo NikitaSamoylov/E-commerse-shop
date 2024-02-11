@@ -1,0 +1,12 @@
+.userBtns {
+    display: flex;
+    align-items: center;
+
+    &__item:not(:last-child) {
+        position: relative;
+        margin-right: 20px;
+    }
+    &__link {
+        color: inherit;
+    }
+}
