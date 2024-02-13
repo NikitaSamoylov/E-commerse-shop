@@ -1,8 +1,6 @@
 import Link from 'next/link.js';
-import { Button, ConfigProvider } from 'antd';
-import { UnorderedListOutlined } from '@ant-design/icons';
-import { Row, Col } from 'antd';
 import { Nav } from '../nav/index.js'; 
+import { ModalDefault } from '../modal/index.js';
 import { SearchForm } from '../search-form/index.js'; 
 import { HeaderUserBtns } from '../header-actions-btns/index.js'; 
 import { Londrina_Solid } from 'next/font/google'; 
@@ -27,11 +25,7 @@ const HeaderDefault:React.FC = () => {
                     <p className={ styles.logo__descr }>магазин б/у электроники</p>
                     </Link>
                     <Link href="/">
-                        <ConfigProvider theme={{ token: { colorPrimary: '#E83131' }}}>
-                            <Button className={ styles.header__btn } type="primary" size='large' icon={ <UnorderedListOutlined /> }>
-                                Каталог
-                            </Button>
-                        </ConfigProvider>
+                        <ModalDefault />
                     </Link>
                 </div>
                 <SearchForm />

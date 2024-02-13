@@ -1,0 +1,30 @@
+.carousel {
+    padding-top: 30px;
+
+    &__item {
+        border-radius: 15px;
+    }
+}
+
+.prevArr {
+    z-index: 2;
+}
+
+// .carouselBlock {
+//     position: relative;
+// }
+
+// .leftArrow, .rightArrow {
+//     position: absolute;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     z-index: 2;
+// }
+
+// .leftArrow {
+//     left: 0;
+// }
+
+// .rightArrow {
+//     right: 0;
+// }
