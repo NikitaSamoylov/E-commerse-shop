@@ -14,6 +14,8 @@ const catalogDefault: TCatalogItem[] = [
     { title: 'ПК', img: ImgPC, link: '/', price: '11000' },
     { title: 'переферия', img: ImgOther, link: '/', price: '2000' },
     { title: 'консоли', img: ImgPS, link: '/', price: '17000' },
+    { title: 'apple', img: ImgPS, link: '/', price: '17000' },
+    { title: 'samsung', img: ImgPS, link: '/', price: '17000' },
   ];
 
   export default catalogDefault;
