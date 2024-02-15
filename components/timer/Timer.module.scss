@@ -1,0 +1,22 @@
+.date {
+
+    &__days,
+    &__hours,
+    &__minutes,
+    &__seconds {
+        color: red;
+        font-size: 26px;
+        font-weight: 700;
+    }
+    &__descr {
+        font-size: 14px;
+        color: rgb(31, 31, 31);
+        font-weight: 300;
+    }
+    &__divider {
+        position: relative;
+        top: -3px;
+        font-size: 28px;
+        color: red;
+    }
+}
