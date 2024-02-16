@@ -1,0 +1,1 @@
+export { NewGoods } from './NewGoods';

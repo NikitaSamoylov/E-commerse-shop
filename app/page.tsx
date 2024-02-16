@@ -1,20 +1,32 @@
-import { MainCarousel } from '../components/carousel/index.js';
-import { SubMenu } from '@/components/sub-menu/index.js'; 
-import { ProductsOnSale } from '@/components/products-on-sale/index.js'; 
+import { MainCarousel } from '../components/carousel/index';
+import { SubMenu } from '@/components/sub-menu/index';
+import { ProductsOnSale } from '@/components/onsale-section/index';
+import { NewGoods } from '@/components/new-goods-section/index';
 import styles from "./page.module.scss";
 
 export default function Home() {
   return (
     <>
-      <div className={styles.carousel}>
+      <section className={
+        `${ styles.carousel } ${ styles.section }`
+      }>
         <MainCarousel />
-      </div>
-      <div className={styles.subMenu}>
+      </section>
+      <section className={
+        `${ styles.subMenu } ${ styles.section }`
+      }>
         <SubMenu />
-      </div>
-      <div>
+      </section>
+      <section className={
+        `${ styles.onSale } ${ styles.section }`
+      }>
         <ProductsOnSale />
-      </div>
+      </section>
+      <section className={
+        `${ styles.onSale } ${ styles.section }`
+      }>
+        <NewGoods />
+      </section>
     </>
   );
 };
