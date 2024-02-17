@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export type TCatalogItem = {
+  id: string;
   title: string;
   img: StaticImageData;
   link: string;
@@ -12,6 +13,7 @@ export type TCatalogItemSale = TCatalogItem & {
 }
 
 export type ProductCardProp = {
+  id: string;
   title: string;
   img: StaticImageData;
   link: string;

@@ -5,7 +5,7 @@ import styles from './Rating.module.scss';
 import './rating-default.scss';
 
 const Rating: React.FC = () => {
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(0);
 
   return (
     <Flex gap="small" vertical>

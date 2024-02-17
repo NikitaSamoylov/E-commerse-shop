@@ -6,10 +6,11 @@ import styles from './ProductsOnSale.module.scss';
 
 const ProductsOnSale: React.FC = () => {
   const productsOnSale = catalogDefaultSale.map(el => {
+
     return (
-      <Col span={ 8 }>
+      <Col span={ 8 } key={ el.id }>
         <CardTemplate
-          key={ el.title }
+          id={ el.id }
           title={ el.title }
           img={ el.img }
           link={ el.link }
