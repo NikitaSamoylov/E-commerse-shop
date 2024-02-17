@@ -12,6 +12,10 @@ export type TCatalogItemSale = TCatalogItem & {
   sale: string;
 }
 
+export type TCatalogItemNew = TCatalogItem & {
+  itemNew: string;
+}
+
 export type ProductCardProp = {
   id: string;
   title: string;
