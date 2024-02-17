@@ -2,7 +2,6 @@
 import NextImage from 'next/image';
 import { IoIosHeartEmpty } from "react-icons/io";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
-import Link from 'next/link';
 import { Card, Flex } from 'antd';
 import { Badge } from 'antd';
 import { MainBtn } from '../main-btn/index.js';
@@ -12,7 +11,7 @@ import './card-template.scss';
 import styles from './CardTemplate.module.scss';
 
 const CardTemplate: React.FC<ProductCardProp> = (
-  { id, title, img, link, price, sale }
+  { id, title, img, price, newItem = null, sale = null }
 ) => {
 
   return (
@@ -23,24 +22,41 @@ const CardTemplate: React.FC<ProductCardProp> = (
     >
       <Flex align='center' justify='start'>
         {
-          sale ?
-            <Badge count={ `${ sale }%` }
-              color='#E83131'
-              size="default"
-            >
-              <NextImage
-                src={ img }
-                height={ 146 }
-                alt={ title }
-                className={ styles.card__img }
-              />
-            </Badge>
-            : <NextImage
+          sale && <Badge count={ `${ sale }%` }
+            color='#E83131'
+            size="default"
+          >
+            <NextImage
               src={ img }
               height={ 146 }
               alt={ title }
               className={ styles.card__img }
             />
+          </Badge>
+        }
+        {
+          newItem && <Badge count={ 'новинка' }
+            color='rgb(108 193 68)'
+            size="small"
+            style={ { paddingTop: '2px' } }
+          >
+            <NextImage
+              src={ img }
+              height={ 146 }
+              alt={ title }
+              className={ styles.card__img }
+            />
+          </Badge>
+        }
+        {
+          sale || newItem ?
+            null :
+            (<NextImage
+              src={ img }
+              height={ 146 }
+              alt={ title }
+              className={ styles.card__img }
+            />)
         }
         <div className={ styles.card__text }>
           <h3 className={ styles.card__price }>от { price } руб.</h3>
@@ -48,7 +64,7 @@ const CardTemplate: React.FC<ProductCardProp> = (
             title='смотреть'
             link={ `products/${ id }` }
           />
-          { sale ?
+          { sale || newItem ?
             <>
               <Flex gap={ 13 } className={ styles.card__icons }>
                 <IoIosHeartEmpty
