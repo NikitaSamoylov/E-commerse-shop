@@ -1,4 +1,5 @@
 "use client";
+import { Flex } from 'antd';
 import styles from './ProductColorPicker.module.scss';
 
 type TRadioProps = {
@@ -11,12 +12,18 @@ const ProductColorPicker: React.FC<TRadioProps> = ({ color, handleProduct, activ
 
 
   return (
-    <button className={ styles.color__btn }
-      style={ activeBtn === color ? { transform: 'scale(1.4)', backgroundColor: color } : { backgroundColor: color } }
-      value={ color }
-      onClick={ () => handleProduct(color) }
-    >
-    </button>
+    <Flex gap={ 0 }>
+      <button className={ styles.color__btn }
+        style={
+          activeBtn === color ?
+            { transform: 'scale(1.4)', backgroundColor: color } :
+            { backgroundColor: color } }
+        value={ color }
+        onClick={ () => handleProduct(color)
+        }
+      >
+      </button>
+    </Flex>
   )
 };
 

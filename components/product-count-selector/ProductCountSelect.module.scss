@@ -1,0 +1,16 @@
+.button {
+  &__item {
+    display: block;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    color: grey;
+  }
+
+  &__count {
+    display: block;
+  }
+}

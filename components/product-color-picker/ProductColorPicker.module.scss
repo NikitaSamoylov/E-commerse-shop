@@ -8,10 +8,3 @@
     transition: .3s;
   }
 }
-
-.btn_checked::before {
-  content: "";
-  width: 29px;
-  height: 29px;
-  border: 1px solid lightgrey;
-}

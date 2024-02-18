@@ -7,6 +7,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { defaultProduct } from './defaultProduct';
 import { Rating } from '@/components/goods-rating';
 import { ProductColorPicker } from '@/components/product-color-picker/index';
+import { ProductCountSelect } from '@/components/product-count-selector/index';
 import styles from './Page.module.scss';
 
 interface IProductProps {
@@ -21,6 +22,7 @@ type TCartProduct = {
   count: number;
   color?: string;
   colorName: string;
+  ram: number;
 }
 
 const Product: React.FC<IProductProps> = ({ params: { id } }) => {
@@ -33,10 +35,12 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     count: 1,
     color: '',
     colorName: defaultProduct.images[0].color,
+    ram: defaultProduct.ram[0],
   }
 
   const [cartProduct, setCartProduct] = useState<TCartProduct>(CartProduct);
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
+  const [productCount, setProductCount] = useState<number>(0);
 
   const handleProduct = (color: string) => {
     setCartProduct(() => ({
@@ -61,7 +65,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
   const reviewsLength = defaultProduct.reviews.length;
 
   return (
-    <>s
+    <>
       <Flex gap={ 20 } className={ styles.product }>
         <div className={ styles.product__img }>
           <NextImg
@@ -111,19 +115,34 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
                 )
               }
             </span>
-            <div className={ styles.product__colorPicker }>
-              <Flex gap={ 10 }>
-                { defaultProduct.images.map((image) => {
-                  return (
-                    <ProductColorPicker color={ image.colorCode }
-                      key={ image.colorCode }
-                      handleProduct={ handleProduct }
-                      activeBtn={ activeBtn }
-                    />
-                  )
-                }) }
-              </Flex>
-            </div>
+            <Flex className={ styles.product__colorPicker }
+              gap={ 15 }
+              justify='flex-start'
+              align='center'
+            >
+              <span className={ styles.product__colorPicker_title }>
+                цвета
+              </span>
+              { defaultProduct.images.map((image) => {
+                return (
+                  <ProductColorPicker color={ image.colorCode }
+                    key={ image.colorCode }
+                    handleProduct={ handleProduct }
+                    activeBtn={ activeBtn }
+                  />
+                )
+              }) }
+            </Flex>
+            <Flex className={ styles.product__count }
+              gap={ 15 }
+              justify='flex-start'
+              align='center'
+            >
+              <span className={ styles.product__count_title }>
+                количество
+              </span>
+              <ProductCountSelect productCount={ productCount } />
+            </Flex>
           </div>
         </div>
       </Flex>
