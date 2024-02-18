@@ -1,0 +1,43 @@
+.product {
+  margin-bottom: 20px;
+
+  &__header {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    margin-bottom: 10px;
+  }
+
+  &__reviews {
+    display: block;
+    font-size: 14px;
+    color: grey;
+  }
+
+  &__img {
+    width: 600px;
+    height: auto;
+  }
+
+  &__description {
+    line-height: 25px;
+  }
+
+  &__description_title {
+    margin-bottom: 15px;
+  }
+
+  &__stock {
+    padding-top: 15px;
+  }
+
+  &__stock_title {
+    font-size: 14px;
+    color: grey;
+  }
+
+  &__colorPicker {
+    padding-top: 35px;
+  }
+}

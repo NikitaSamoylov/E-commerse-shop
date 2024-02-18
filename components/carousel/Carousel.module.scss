@@ -1,13 +1,12 @@
 .carousel {
-    padding-top: 30px;
 
-    &__item {
-        border-radius: 15px;
-    }
+  &__item {
+    border-radius: 15px;
+  }
 }
 
 .prevArr {
-    z-index: 2;
+  z-index: 2;
 }
 
 // .carouselBlock {

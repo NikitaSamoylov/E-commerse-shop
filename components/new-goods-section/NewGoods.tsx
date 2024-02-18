@@ -1,20 +1,20 @@
 import { Row, Col } from 'antd';
 import catalogDefaultNew from '../static-catalog-new/CatalogNew';
+import { newProducts } from '../products-default-catalog/ProductsDefault';
 import { CardTemplate } from '../product-card-template/index';
 import styles from './NewGood.module.scss';
 
 const NewGoods: React.FC = () => {
-  const productsNew = catalogDefaultNew.map((el) => {
+  const productsNew = newProducts.map((el) => {
     return (
       <Col span={ 8 } key={ el.id }>
         <CardTemplate
           key={ el.id }
           id={ el.id }
-          title={ el.title }
-          img={ el.img }
-          link={ el.link }
+          title={ el.name }
+          img={ el.images[0].image }
           price={ el.price }
-          newItem={ el.newItem }
+          itemNew={ el.itemNew }
         />
       </Col>
     )

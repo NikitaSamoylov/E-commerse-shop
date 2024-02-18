@@ -16,12 +16,33 @@ export type TCatalogItemNew = TCatalogItem & {
   itemNew: string;
 }
 
+type TImages = {
+  color: string,
+  colorCode: string,
+  image: StaticImageData,
+};
+
 export type ProductCardProp = {
   id: string;
   title: string;
-  img: StaticImageData;
-  link: string;
-  price: string;
+  img: any;
+  price: number;
   sale?: string;
-  newItem?: string;
+  itemNew?: boolean;
+  rateCount: number;
 };
+
+export type TNewProducts = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  brand: string;
+  category: string;
+  inStock: boolean;
+  itemNew: true,
+  images: TImages[];
+  reviews: string[];
+};
+
+

@@ -11,7 +11,7 @@ import './card-template.scss';
 import styles from './CardTemplate.module.scss';
 
 const CardTemplate: React.FC<ProductCardProp> = (
-  { id, title, img, price, newItem = null, sale = null }
+  { id, title, img, price, itemNew = null, sale = null, rateCount }
 ) => {
 
   return (
@@ -35,7 +35,7 @@ const CardTemplate: React.FC<ProductCardProp> = (
           </Badge>
         }
         {
-          newItem && <Badge count={ 'новинка' }
+          itemNew && <Badge count={ 'новинка' }
             color='rgb(108 193 68)'
             size="small"
             style={ { paddingTop: '2px' } }
@@ -49,7 +49,7 @@ const CardTemplate: React.FC<ProductCardProp> = (
           </Badge>
         }
         {
-          sale || newItem ?
+          sale || itemNew ?
             null :
             (<NextImage
               src={ img }
@@ -64,7 +64,7 @@ const CardTemplate: React.FC<ProductCardProp> = (
             title='смотреть'
             link={ `products/${ id }` }
           />
-          { sale || newItem ?
+          { sale || itemNew ?
             <>
               <Flex gap={ 13 } className={ styles.card__icons }>
                 <IoIosHeartEmpty
@@ -77,7 +77,7 @@ const CardTemplate: React.FC<ProductCardProp> = (
                 />
               </Flex>
               <div className={ styles.card__rating }>
-                <Rating />
+                <Rating rateCount={ rateCount } disabled={ true } />
               </div>
             </> :
             null

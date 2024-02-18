@@ -1,0 +1,17 @@
+.color {
+
+  &__btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+    transition: .3s;
+  }
+}
+
+.btn_checked::before {
+  content: "";
+  width: 29px;
+  height: 29px;
+  border: 1px solid lightgrey;
+}
