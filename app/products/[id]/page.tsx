@@ -8,6 +8,7 @@ import { defaultProduct } from './defaultProduct';
 import { Rating } from '@/components/goods-rating';
 import { ProductColorPicker } from '@/components/product-color-picker/index';
 import { ProductCountSelect } from '@/components/product-count-selector/index';
+import { UserReviews } from '@/components/user-reviews/UserReviews';
 import styles from './Page.module.scss';
 
 interface IProductProps {
@@ -41,6 +42,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
   const [cartProduct, setCartProduct] = useState<TCartProduct>(CartProduct);
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
   const [productCount, setProductCount] = useState<number>(0);
+  const [userReviews, setUserReviews] = useState(defaultProduct.reviews);
 
   const handleProduct = (color: string) => {
     setCartProduct(() => ({
@@ -73,6 +75,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
             width={ 600 }
             height={ 405.76 }
             alt={ 'фото' }
+            layout='responsive'
             priority
           />
         </div>
@@ -146,10 +149,20 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
           </div>
         </div>
       </Flex>
-      <h3 className={ styles.product__description_title }>Описание</h3>
-      <p className={ styles.product__description }>
-        { defaultProduct.description }
-      </p>
+      <div className={ styles.product__description }>
+        <h3 className={ styles.product__description_title }>
+          Описание
+        </h3>
+        <p className={ styles.product__description_text }>
+          { defaultProduct.description }
+        </p>
+      </div>
+      <div className={ styles.product__reviews }>
+        <h3 style={ { color: 'black', marginBottom: '25px' } }>
+          Отзывы о продукте
+        </h3>
+        <UserReviews userReviews={ userReviews } />
+      </div>
     </>
   )
 };
