@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { HeaderDefault } from "@/components/header-default/index.js";
+import StoreProvider from './StoreProvider';
 import "./globals.scss";
 
 export const inter = Inter({ subsets: ["latin"], weight: ['300', '400', '700'] });
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={ inter.className }>
-        <HeaderDefault />
-        <main className="container">
-          { children }
-        </main>
+        <StoreProvider>
+          <HeaderDefault />
+          <main className="container">
+            { children }
+          </main>
+        </StoreProvider>
       </body>
     </html>
   );
