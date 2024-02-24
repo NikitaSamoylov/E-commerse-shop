@@ -1,86 +1,10 @@
 import { Row, Col, Flex } from 'antd';
 import Moment from 'react-moment';
 import 'moment/locale/ru';
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import { Rating } from '../goods-rating';
 import styles from './UserReviews.module.scss';
-
-// type TUserReviews = {
-//   userReviews: any;
-// }
-
-// const UserReviews: React.FC<TUserReviews> = (
-//   { userReviews }
-// ) => {
-
-//   const reviewElements = userReviews.slice(0, 3).map((review: any) => {
-
-//     return (
-//       <Col key={ review.id }
-//         span={ 6 }
-//         className={ styles.review__item }
-//         flex="auto"
-//       >
-//         <div className={ styles.review__header }
-//         >
-//           <Flex align='center'
-//             gap={ 10 }
-//             className={ styles.review__header_header }
-//           >
-//             <h4>
-//               { review.user.name }
-//             </h4>
-//             <span className={ styles.review__date }>
-//               <Moment date={ review.user.createdAt }
-//                 fromNow
-//                 locale='ru'
-//               />
-//             </span>
-//           </Flex>
-//           <Rating rateCount={ review.rating }
-//             disabled={ true }
-//           />
-//         </div>
-//         <ul style={
-//           {
-//             paddingTop: '15px',
-//             paddingRight: '15px',
-//             paddingLeft: '15px'
-//           }
-//         }>
-//           <li className={ styles.review__item_item }>
-//             <h4 className={ styles.review__item_title }>
-//               Преимущества
-//             </h4>
-//             <p>{ review.advantages }</p>
-//           </li>
-//           <li className={ styles.review__item_item }>
-//             <h4 className={ styles.review__item_title }>
-//               Недостатки
-//             </h4>
-//             <p>{ review.disadvantages }</p>
-//           </li>
-//           <li className={ styles.review__item_item }>
-//             <h4 className={ styles.review__item_title }>
-//               Комментарий
-//             </h4>
-//             <p>{ review.comment }</p>
-//           </li>
-//         </ul>
-//       </Col>
-//     )
-//   })
-
-//   return (
-//     <Row gutter={ [16, 16] }
-//       justify={ "space-between" }
-//     >
-//       { reviewElements }
-//     </Row>
-//   )
-// }
-
-// export { UserReviews };
-
 import { useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
@@ -88,6 +12,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+
+// type TUserReviews = {
+//   userReviews: any;
+// }
+
 
 type TUserReviews = {
   userReviews: any;
@@ -169,18 +98,27 @@ const UserReviews: React.FC<TUserReviews> = (
       modules={ [Navigation, Pagination, A11y] }
       spaceBetween={ 20 }
       slidesPerView={ 3 }
-      // navigation
       navigation={ {
         prevEl: prevRef.current,
         nextEl: nextRef.current,
       } }
-      pagination={ { clickable: true } }
-      scrollbar={ { draggable: true } }
+      // pagination={ { clickable: true } }
+      // scrollbar={ { draggable: true } }
       onInit={ () => setInit(true) }
     >
       { reviewElements }
-      <button ref={ prevRef }>previous</button>
-      <button ref={ nextRef }>next</button>
+      <div className={ styles.slide__btns }>
+        <button className={ styles.slide__btns_item }
+          ref={ prevRef }
+        >
+          <IoIosArrowBack size={ 20 } />
+        </button>
+        <button className={ styles.slide__btns_item }
+          ref={ nextRef }
+        >
+          <IoIosArrowForward size={ 20 } />
+        </button>
+      </div>
     </Swiper>
   )
 }
