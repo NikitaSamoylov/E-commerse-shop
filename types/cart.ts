@@ -5,6 +5,6 @@ export type TCart = {
   itemImg: string;
   count: number;
   color?: string;
-  colorName: string;
-  ram: number;
+  colorName?: string;
+  ram?: number;
 };

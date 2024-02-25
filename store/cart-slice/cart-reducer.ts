@@ -9,7 +9,7 @@ let initialState: TInitialState = [
     price: 3434434,
     itemImg: 'https://sfkjsfk',
     count: 1,
-    color: '',
+    // color: '',
     colorName: 'grey',
     ram: 8,
   }

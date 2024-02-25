@@ -1,19 +1,24 @@
 .product {
   margin-bottom: 35px;
 
-  &__header {
-    margin-bottom: 20px;
-  }
+  // &__header {
+  //   margin-bottom: 20px;
+  // }
 
   &__title {
-    margin-bottom: 25px;
+    margin-bottom: 5px;
+  }
+
+  &__price {
+    font-size: 26px;
+    color: #E83131;
+    // margin-bottom: 20px;
   }
 
   &__reviews {
     display: block;
     font-size: 14px;
     color: grey;
-    margin-bottom: 35px;
   }
 
   &__img {
@@ -34,7 +39,7 @@
   }
 
   &__stock {
-    padding-top: 15px;
+    padding-top: 10px;
   }
 
   &__stock_title {
@@ -42,9 +47,9 @@
     color: grey;
   }
 
-  &__colorPicker {
-    padding-top: 35px;
-  }
+  // &__colorPicker {
+  //   padding-top: 35px;
+  // }
 
   &__colorPicker_title {
     font-size: 14px;
@@ -56,6 +61,15 @@
   }
 
   &__count_title {
+    font-size: 14px;
+    color: grey;
+  }
+
+  &__ram {
+    padding-top: 15px;
+  }
+
+  &__ram_title {
     font-size: 14px;
     color: grey;
   }

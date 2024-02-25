@@ -1,13 +1,15 @@
 "use client";
 import NextImg from 'next/image';
 import { useState } from 'react';
-import { Flex } from 'antd';
+import { Flex, Divider } from 'antd';
 import { CiCircleCheck } from "react-icons/ci";
 import { CiCircleRemove } from "react-icons/ci";
 import { defaultProduct } from './defaultProduct';
+import { RURub } from '@/libs/utils/currency-intl';
 import { Rating } from '@/components/goods-rating';
 import { ProductColorPicker } from '@/components/product-color-picker/index';
 import { ProductCountSelect } from '@/components/product-count-selector/index';
+import { ProductRam } from '@/components/product-ram/index';
 import { UserReviews } from '@/components/user-reviews/UserReviews';
 import styles from './Page.module.scss';
 
@@ -28,7 +30,7 @@ type TCartProduct = {
 
 const Product: React.FC<IProductProps> = ({ params: { id } }) => {
 
-  const CartProduct: TCartProduct = {
+  const [cartProduct, setCartProduct] = useState<TCartProduct>({
     id: defaultProduct.id,
     name: defaultProduct.name,
     price: defaultProduct.price,
@@ -37,11 +39,9 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     color: '',
     colorName: defaultProduct.images[0].color,
     ram: defaultProduct.ram[0],
-  }
+  });
 
-  const [cartProduct, setCartProduct] = useState<TCartProduct>(CartProduct);
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
-  const [productCount, setProductCount] = useState<number>(0);
   const [userReviews, setUserReviews] = useState(defaultProduct.reviews);
 
   const handleProduct = (color: string) => {
@@ -51,6 +51,29 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     setActiveBtn(color);
     findImg(color);
   };
+
+  const increaseProductCount = () => {
+    setCartProduct({
+      ...cartProduct, count: cartProduct.count + 1
+    })
+  };
+
+  const decreaseProductCount = () => {
+    if (cartProduct.count === 1) {
+      return
+    };
+
+    setCartProduct({
+      ...cartProduct, count: cartProduct.count - 1
+    })
+  };
+
+  const handleRam = (ram: number) => {
+    setCartProduct({
+      ...cartProduct, ram
+    })
+  };
+
 
   const findImg = (color: string) => {
     const img = defaultProduct.images.filter(item => item.colorCode === color);
@@ -84,6 +107,10 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
             <h2 className={ styles.product__title }>
               { defaultProduct.name }
             </h2>
+            <h3 className={ styles.product__price }>
+              { RURub.format(defaultProduct.price) }
+            </h3>
+            <Divider />
             <Flex className={ styles.rating }
               align='center'
               gap={ 15 }
@@ -117,6 +144,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
                   </Flex>
                 )
               }
+              <Divider style={ { margin: '18px 0' } } />
             </span>
             <Flex className={ styles.product__colorPicker }
               gap={ 15 }
@@ -144,8 +172,33 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
               <span className={ styles.product__count_title }>
                 количество
               </span>
-              <ProductCountSelect productCount={ productCount } />
+              <ProductCountSelect
+                productCount={ cartProduct.count }
+                decreaseProductCount={ decreaseProductCount }
+                increaseProductCount={ increaseProductCount }
+              />
             </Flex>
+            <Flex className={ styles.product__ram }
+              gap={ 15 }
+              justify='flex-start'
+              align='center'
+            >
+              <span className={ styles.product__ram_title }>
+                память
+              </span>
+              {
+                defaultProduct.ram.map(el => {
+                  return (
+                    <ProductRam ram={ el }
+                      key={ el }
+                      handleRam={ handleRam }
+                      currentRam={ cartProduct.ram }
+                    />
+                  )
+                })
+              }
+            </Flex>
+            <Divider style={ { margin: '18px 0' } } />
           </div>
         </div>
       </Flex>

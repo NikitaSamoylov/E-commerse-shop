@@ -45,4 +45,8 @@ export type TNewProducts = {
   reviews: string[];
 };
 
+export type TProductRam = {
+  ram: number;
+}
+
 

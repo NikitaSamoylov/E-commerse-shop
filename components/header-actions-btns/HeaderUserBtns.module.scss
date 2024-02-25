@@ -1,12 +1,24 @@
 .userBtns {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
-    &__item:not(:last-child) {
-        position: relative;
-        margin-right: 20px;
-    }
-    &__link {
-        color: inherit;
-    }
+  &__item {
+    position: relative;
+  }
+
+  &__item_icon {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: transparent;
+  }
+
+  &__item:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  &__link {
+    color: inherit;
+  }
 }
