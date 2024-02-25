@@ -1,14 +1,12 @@
-import Link from 'next/link.js';
 import { Nav } from '../nav/index.js';
 import { ModalDefault } from '../modal/index.js';
 import { SearchForm } from '../search-form/index.js';
 import { HeaderUserBtns } from '../header-actions-btns/index.js';
-import { Londrina_Solid } from 'next/font/google';
+import { Logo } from '../logo/index.js';
 import styles from './HeaderDefault.module.scss';
 
-const Londrina = Londrina_Solid({ subsets: ["latin"], weight: '400' });
-
 const HeaderDefault: React.FC = () => {
+
   return (
     <header className={ styles.header }>
       <div className={ styles.header__nav }>
@@ -18,15 +16,8 @@ const HeaderDefault: React.FC = () => {
       </div>
       <div className={ `container ${ styles.header__container }` }>
         <div className={ styles.logo }>
-          <Link href="/"
-            className={ `${ Londrina.className } ${ styles.logo__title }` }
-          >
-            Electronix
-            <p className={ styles.logo__descr }>магазин б/у электроники</p>
-          </Link>
-          <Link href="/">
-            <ModalDefault />
-          </Link>
+          <Logo />
+          <ModalDefault />
         </div>
         <SearchForm />
         <HeaderUserBtns />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { HeaderDefault } from "@/components/header-default/index.js";
+import { FooterDefault } from "@/components/footerDefault/FooterDefault";
 import StoreProvider from './StoreProvider';
 import "./globals.scss";
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <main className="container">
             { children }
           </main>
+          <FooterDefault />
         </StoreProvider>
       </body>
     </html>

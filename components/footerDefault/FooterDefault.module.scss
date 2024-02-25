@@ -1,0 +1,17 @@
+.footer {
+  max-width: 1185px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  &__content {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+
+  &__signature {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding-bottom: 5px;
+  }
+}

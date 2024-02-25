@@ -21,20 +21,7 @@
 .logo {
   padding-top: 30px;
   display: flex;
-  align-items: flex-end;
-
-  &__title {
-    position: relative;
-    top: 10px;
-    color: #E83131;
-    font-size: 45px;
-    line-height: 29px;
-  }
-
-  &__descr {
-    font-size: 17px;
-    color: rgb(18, 18, 18);
-  }
+  align-items: center;
 }
 
 .search {

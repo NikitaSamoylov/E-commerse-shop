@@ -1,0 +1,19 @@
+.logo {
+
+  &__title {
+    position: relative;
+    top: 0;
+    color: #E83131;
+    font-size: 38px;
+    line-height: 13px;
+  }
+
+  &__title:hover {
+    color: #E83131;
+  }
+
+  &__descr {
+    font-size: 17px;
+    color: rgb(18, 18, 18);
+  }
+}

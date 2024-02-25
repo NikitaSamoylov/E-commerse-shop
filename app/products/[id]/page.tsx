@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Flex, Divider } from 'antd';
 import { CiCircleCheck } from "react-icons/ci";
 import { CiCircleRemove } from "react-icons/ci";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { useAppDispatch } from '@/hooks';
+import { addItem } from '@/store/cart-slice/cart-reducer';
 import { defaultProduct } from './defaultProduct';
 import { RURub } from '@/libs/utils/currency-intl';
 import { Rating } from '@/components/goods-rating';
@@ -11,6 +14,7 @@ import { ProductColorPicker } from '@/components/product-color-picker/index';
 import { ProductCountSelect } from '@/components/product-count-selector/index';
 import { ProductRam } from '@/components/product-ram/index';
 import { UserReviews } from '@/components/user-reviews/UserReviews';
+import { MainBtn } from '@/components/main-btn';
 import styles from './Page.module.scss';
 
 interface IProductProps {
@@ -29,6 +33,7 @@ type TCartProduct = {
 }
 
 const Product: React.FC<IProductProps> = ({ params: { id } }) => {
+  const dispatch = useAppDispatch();
 
   const [cartProduct, setCartProduct] = useState<TCartProduct>({
     id: defaultProduct.id,
@@ -40,7 +45,6 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     colorName: defaultProduct.images[0].color,
     ram: defaultProduct.ram[0],
   });
-
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
   const [userReviews, setUserReviews] = useState(defaultProduct.reviews);
 
@@ -72,6 +76,10 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     setCartProduct({
       ...cartProduct, ram
     })
+  };
+
+  const addToCart = () => {
+    dispatch(addItem(cartProduct))
   };
 
 
@@ -199,6 +207,20 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
               }
             </Flex>
             <Divider style={ { margin: '18px 0' } } />
+            <div onClick={ addToCart }>
+              <Flex align='center'
+                justify='flex-start'
+                gap={ 10 }
+              >
+                <MainBtn color={ '#E83131' }
+                  title={ 'в корзину' }
+                />
+                <IoMdHeartEmpty size={ 23 }
+                  color='red'
+                  style={ { cursor: 'pointer' } }
+                />
+              </Flex>
+            </div>
           </div>
         </div>
       </Flex>
@@ -210,7 +232,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
           { defaultProduct.description }
         </p>
       </div>
-      <div className={ styles.product__reviews }>
+      <div className={ styles.product__feedback }>
         <h3 style={ { color: 'black', marginBottom: '25px' } }>
           Отзывы о продукте
         </h3>
