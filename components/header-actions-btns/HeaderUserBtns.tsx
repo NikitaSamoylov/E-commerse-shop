@@ -35,11 +35,13 @@ const HeaderUserBtns: React.FC = () => {
         </Link>
       </li>
       <li className={ styles.userBtns__item }>
-        <button className={ styles.userBtns__item_icon }>
-          <Badge count={ cartItems.length } size='small'>
-            <LuShoppingCart size={ 20 } color='grey' />
-          </Badge>
-        </button>
+        <Link href="/cart">
+          <button className={ styles.userBtns__item_icon }>
+            <Badge count={ cartItems.length } size='small'>
+              <LuShoppingCart size={ 20 } color='grey' />
+            </Badge>
+          </button>
+        </Link>
         <Link className={ styles.userBtns__link } href="/">
           корзина
         </Link>

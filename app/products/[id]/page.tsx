@@ -1,7 +1,8 @@
 "use client";
 import NextImg from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Flex, Divider } from 'antd';
+import { useAppSelector } from '@/hooks';
 import { CiCircleCheck } from "react-icons/ci";
 import { CiCircleRemove } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
@@ -12,9 +13,7 @@ import { RURub } from '@/libs/utils/currency-intl';
 import { Rating } from '@/components/goods-rating';
 import { ProductColorPicker } from '@/components/product-color-picker/index';
 import { ProductCountSelect } from '@/components/product-count-selector/index';
-import { ProductRam } from '@/components/product-ram/index';
 import { UserReviews } from '@/components/user-reviews/UserReviews';
-import { MainBtn } from '@/components/main-btn';
 import styles from './Page.module.scss';
 
 interface IProductProps {
@@ -29,7 +28,6 @@ type TCartProduct = {
   count: number;
   color?: string;
   colorName: string;
-  ram: number;
 }
 
 const Product: React.FC<IProductProps> = ({ params: { id } }) => {
@@ -41,19 +39,21 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     price: defaultProduct.price,
     itemImg: defaultProduct.images[0].image[0],
     count: 1,
-    color: '',
+    color: defaultProduct.images[0].colorCode,
     colorName: defaultProduct.images[0].color,
-    ram: defaultProduct.ram[0],
   });
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
   const [userReviews, setUserReviews] = useState(defaultProduct.reviews);
+  const [isBtnLocked, setIsBtnLocked] = useState<boolean>(false);
 
-  const handleProduct = (color: string) => {
-    setCartProduct(() => ({
-      ...cartProduct, color
-    }))
-    setActiveBtn(color);
-    findImg(color);
+  const cartStore = useAppSelector(state => state.cartItem);
+
+  const handleProduct = (colorCode: string) => {
+    setCartProduct({
+      ...cartProduct, color: colorCode
+    });
+    setActiveBtn(colorCode);
+    findImg(colorCode);
   };
 
   const increaseProductCount = () => {
@@ -72,23 +72,16 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
     })
   };
 
-  const handleRam = (ram: number) => {
-    setCartProduct({
-      ...cartProduct, ram
-    })
-  };
-
   const addToCart = () => {
     dispatch(addItem(cartProduct))
   };
 
-
   const findImg = (color: string) => {
+    console.log(cartProduct)
     const img = defaultProduct.images.filter(item => item.colorCode === color);
     setCartProduct({
-      ...cartProduct, itemImg: img[0].image[0]
+      ...cartProduct, itemImg: img[0].image[0], color: color
     })
-    console.log(img)
   };
 
   const rateCount = Math.ceil(defaultProduct.reviews.reduce((acc, el) => {
@@ -164,7 +157,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
               </span>
               { defaultProduct.images.map((image) => {
                 return (
-                  <ProductColorPicker color={ image.colorCode }
+                  <ProductColorPicker colorCode={ image.colorCode }
                     key={ image.colorCode }
                     handleProduct={ handleProduct }
                     activeBtn={ activeBtn }
@@ -186,39 +179,35 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
                 increaseProductCount={ increaseProductCount }
               />
             </Flex>
-            <Flex className={ styles.product__ram }
-              gap={ 15 }
-              justify='flex-start'
-              align='center'
-            >
-              <span className={ styles.product__ram_title }>
-                память
-              </span>
-              {
-                defaultProduct.ram.map(el => {
-                  return (
-                    <ProductRam ram={ el }
-                      key={ el }
-                      handleRam={ handleRam }
-                      currentRam={ cartProduct.ram }
-                    />
-                  )
-                })
-              }
-            </Flex>
             <Divider style={ { margin: '18px 0' } } />
-            <div onClick={ addToCart }>
+            <div>
               <Flex align='center'
                 justify='flex-start'
                 gap={ 10 }
               >
-                <MainBtn color={ '#E83131' }
-                  title={ 'в корзину' }
-                />
-                <IoMdHeartEmpty size={ 23 }
-                  color='red'
-                  style={ { cursor: 'pointer' } }
-                />
+                {
+                  !isBtnLocked ?
+                    (
+                      <>
+                        <button
+                          style={ { color: '#E83131' } }
+                          onClick={ addToCart }
+                        >
+                          в корзину
+                        </button>
+                        <IoMdHeartEmpty size={ 23 }
+                          color='red'
+                          style={ { cursor: 'pointer' } }
+                        />
+                      </>
+                    ) :
+                    <button
+                      style={ { color: '#E83131' } }
+                      disabled
+                    >
+                      в корзине
+                    </button>
+                }
               </Flex>
             </div>
           </div>

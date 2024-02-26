@@ -1,1 +1,0 @@
-export { ProductRam } from './ProductRam';

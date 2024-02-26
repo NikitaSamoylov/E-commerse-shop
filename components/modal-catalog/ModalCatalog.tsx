@@ -9,8 +9,7 @@ const ModalCatalog: React.FC = () => {
   const catalogElements = catalogDefault.map(item => {
     return (
       <Col span={ 8 }>
-        <CardTemplate title={ item.title }
-          key={ item.title }
+        <CardTemplate key={ item.title } title={ item.title }
           img={ item.img }
           link={ item.link }
           price={ item.price }

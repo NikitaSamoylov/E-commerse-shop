@@ -3,23 +3,22 @@ import { Flex } from 'antd';
 import styles from './ProductColorPicker.module.scss';
 
 type TRadioProps = {
-  color: string;
+  colorCode: string;
   handleProduct: (color: string) => void;
   activeBtn: string;
 }
 
-const ProductColorPicker: React.FC<TRadioProps> = ({ color, handleProduct, activeBtn }) => {
-
+const ProductColorPicker: React.FC<TRadioProps> = ({ colorCode, handleProduct, activeBtn }) => {
 
   return (
     <Flex gap={ 0 }>
       <button className={ styles.color__btn }
         style={
-          activeBtn === color ?
-            { transform: 'scale(1.4)', backgroundColor: color } :
-            { backgroundColor: color } }
-        value={ color }
-        onClick={ () => handleProduct(color)
+          activeBtn === colorCode ?
+            { transform: 'scale(1.4)', backgroundColor: colorCode } :
+            { backgroundColor: colorCode } }
+        value={ colorCode }
+        onClick={ () => handleProduct(colorCode)
         }
       >
       </button>

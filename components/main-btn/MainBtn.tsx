@@ -1,3 +1,4 @@
+"use client";
 import { ConfigProvider, Button } from 'antd';
 
 import styles from './MainBtn.module.scss';
