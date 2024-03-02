@@ -6,7 +6,7 @@ export const defaultProduct = {
   description: '6.52 Смартфон realme C11 (2021) 32 ГБ отличается светло-синим цветовым исполнением корпуса и оснащается дисплеем с поддержкой разрешения 1600x720 пикс. В устройстве предусмотрены процессор Spreadtrum SC9863A и 2 ГБ оперативной памяти для обеспечения многозадачности и поддержки высокого быстродействия. Для долговременного хранения приложений, мультимедийных файлов и документов аппарат получает 32 ГБ встроенной памяти. Смартфон realme C11(2021) 32 ГБ работает под управлением платформы Android 11 Go с невысокой ресурсоемкостью.Аккумулятор этой модели характеризуется емкостью 5000 мАч, поэтому он не требует частой подзарядки даже при активной эксплуатации.Сканер лица облегчает пользователю разблокировку дисплея устройства.Смартфон с эстетичным внешним видом привлекателен благодаря сбалансированным характеристикам',
   price: 23999,
   brand: "realme",
-  category: "phone",
+  category: "смартфон",
   inStock: false,
   itemNew: true,
   images: [
@@ -14,7 +14,7 @@ export const defaultProduct = {
       color: "White",
       colorCode: "#FFFFFF",
       image: [
-        'https://drive.google.com/thumbnail?id=1vIc_guD8AAB2WXjD-GR0bcw66mMPzUSU',
+        'https://drive.google.com/thumbnail?id=16ltPT6DEHa8b2TR6MQxLV7buPkXGwYC7',
         'https://drive.google.com/thumbnail?id=1vIc_guD8AAB2WXjD-GR0bcw66mMPzUSU',
       ],
     },

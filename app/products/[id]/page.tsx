@@ -1,6 +1,6 @@
 "use client";
 import NextImg from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Flex, Divider } from 'antd';
 import { useAppSelector } from '@/hooks';
 import { CiCircleCheck } from "react-icons/ci";
@@ -8,39 +8,35 @@ import { CiCircleRemove } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useAppDispatch } from '@/hooks';
 import { addItem } from '@/store/cart-slice/cart-reducer';
+import { notify } from '../../../utils/popupMsg';
+import { ToastContainer } from 'react-toastify';
 import { defaultProduct } from './defaultProduct';
 import { RURub } from '@/libs/utils/currency-intl';
 import { Rating } from '@/components/goods-rating';
 import { ProductColorPicker } from '@/components/product-color-picker/index';
 import { ProductCountSelect } from '@/components/product-count-selector/index';
 import { UserReviews } from '@/components/user-reviews/UserReviews';
+import { TCart } from '../../../types/cart';
 import styles from './Page.module.scss';
+import React from 'react';
 
 interface IProductProps {
   params: { id: string };
 };
 
-type TCartProduct = {
-  id: string;
-  name: string;
-  price: number;
-  itemImg: string;
-  count: number;
-  color?: string;
-  colorName: string;
-}
-
 const Product: React.FC<IProductProps> = ({ params: { id } }) => {
   const dispatch = useAppDispatch();
 
-  const [cartProduct, setCartProduct] = useState<TCartProduct>({
-    id: defaultProduct.id,
+  const [cartProduct, setCartProduct] = useState<TCart>({
+    id: defaultProduct.id + 1,
     name: defaultProduct.name,
     price: defaultProduct.price,
     itemImg: defaultProduct.images[0].image[0],
     count: 1,
     color: defaultProduct.images[0].colorCode,
     colorName: defaultProduct.images[0].color,
+    category: defaultProduct.category,
+    onRemove: false,
   });
   const [activeBtn, setActiveBtn] = useState(defaultProduct.images[0].colorCode);
   const [userReviews, setUserReviews] = useState(defaultProduct.reviews);
@@ -73,7 +69,8 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
   };
 
   const addToCart = () => {
-    dispatch(addItem(cartProduct))
+    dispatch(addItem(cartProduct));
+    notify()
   };
 
   const findImg = (color: string) => {
@@ -194,6 +191,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
                           onClick={ addToCart }
                         >
                           в корзину
+                          <ToastContainer />
                         </button>
                         <IoMdHeartEmpty size={ 23 }
                           color='red'

@@ -1,0 +1,100 @@
+.cart {
+
+  &__item {
+    position: relative;
+    padding-top: 25px;
+  }
+
+  &__title {
+    margin-bottom: 18px;
+  }
+
+  &__delete_item_btn {
+    color: rgb(10, 106, 166);
+    background-color: transparent;
+    font-size: 16px;
+  }
+
+  &__img {
+    margin-right: 15px;
+    margin-left: 30px;
+    margin-bottom: auto;
+  }
+
+  &__category {
+    color: grey;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  &__product {
+
+    &_title {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    &_price {
+      font-size: 16px;
+      color: #E83131;
+    }
+
+    &_checkbox {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-right: 15px;
+    }
+
+    &_total {
+      width: 80px;
+
+      &_total {
+        margin-left: auto;
+        display: block;
+        font-size: 14px;
+        color: grey;
+        margin-bottom: 5px;
+      }
+
+      &_price {
+        display: block;
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__counter {
+    width: 82px;
+
+    &_content {
+      margin-bottom: 10px;
+    }
+
+    &_btn {
+      background-color: transparent;
+      padding: 7px;
+      border: 1px solid lightgrey;
+      border-radius: 3px;
+      color: grey;
+    }
+
+    &_count {
+      display: block;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 16px;
+    }
+
+    &_subBtn {
+      display: block;
+      color: grey;
+      background-color: transparent;
+      font-size: 14px;
+    }
+
+    &_subBtn:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+}
