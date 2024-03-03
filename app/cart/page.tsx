@@ -11,16 +11,22 @@ import {
 } from 'react-transition-group';
 import { useState, useEffect } from 'react';
 import Img from 'next/image';
+import { redirect } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '@/hooks';
+import { notify } from '@/utils/popupMsg';
+import { ToastContainer } from 'react-toastify';
 import { RURub } from '@/libs/utils/currency-intl';
 import { TCart } from '../../types/cart';
 import { removeItems } from '@/store/cart-slice/cart-reducer';
+import { increaseCount } from '@/store/cart-slice/cart-reducer';
+import { decreaseCount } from '@/store/cart-slice/cart-reducer';
 import styles from './cart.module.scss';
 import './transition-group.scss';
 
 const CartPage: React.FC = () => {
   let [itemsOnRemove, setItemsOnRemove] = useState<string[]>([]);
   const [mainCheckbox, setMainCheckbox] = useState<boolean>(false);
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const cartItemStore = useAppSelector<TCart[]>(state => state.cartItem);
   const dispatch = useAppDispatch();
 
@@ -48,12 +54,27 @@ const CartPage: React.FC = () => {
   };
 
   const handleOnDeleteItemBtn = (id: string) => {
-    dispatch(removeItems(id))
+    dispatch(removeItems([id]))
   };
 
   const handleMainCheckbox = () => {
     setMainCheckbox(mainCheckbox => !mainCheckbox);
   };
+
+  const setProductPriceQty = () => {
+    const subTotal = cartItemStore.reduce((currentSum, nextValue) => {
+      return currentSum + (nextValue.price * nextValue.count)
+    }, 0)
+    setCartTotalPrice(subTotal)
+  };
+
+  useEffect(() => {
+    if (cartItemStore.length === 0) {
+      redirect('/')
+    };
+
+    setProductPriceQty();
+  }, [cartItemStore]);
 
   useEffect(() => {
     handleOnDeleteItems();
@@ -63,7 +84,25 @@ const CartPage: React.FC = () => {
     dispatch(removeItems(itemsOnRemove))
   };
 
-  console.log(itemsOnRemove)
+  const increaseProductCount = (id: string) => {
+    cartItemStore.map(el =>
+      el.id === id &&
+        el.count <= el.maxCount - 1 ?
+        dispatch(increaseCount(id)) :
+        el.id === id && el.count === el.maxCount ?
+          notify('Последний товар') :
+          el
+    )
+  };
+
+  const decreaseProductCount = (idItem: string) => {
+    cartItemStore.map(el =>
+      (el.id === idItem) &&
+        (el.count >= 2) ?
+        dispatch(decreaseCount(idItem)) :
+        el
+    )
+  };
 
   const cartLocalStore = useAppSelector(state => state.cartItem);
   const cartLocalStoreItems = cartLocalStore.map((cartItem: TCart) => {
@@ -123,13 +162,18 @@ const CartPage: React.FC = () => {
               <Flex align='center'
                 className={ styles.cart__counter_content }
               >
-                <button className={ styles.cart__counter_btn }>
+                <button className={ styles.cart__counter_btn }
+                  onClick={ () => increaseProductCount(cartItem.id) }
+                >
+                  <ToastContainer />
                   +
                 </button>
                 <span className={ styles.cart__counter_count }>
                   { cartItem.count }
                 </span>
-                <button className={ styles.cart__counter_btn }>
+                <button className={ styles.cart__counter_btn }
+                  onClick={ () => decreaseProductCount(cartItem.id) }
+                >
                   -
                 </button>
               </Flex>
@@ -152,8 +196,8 @@ const CartPage: React.FC = () => {
             </div>
           </Flex>
           <Divider />
-        </li>
-      </CSSTransition>
+        </li >
+      </CSSTransition >
     )
   })
 
@@ -197,6 +241,21 @@ const CartPage: React.FC = () => {
             { cartLocalStoreItems }
           </TransitionGroup>
         </ul>
+        <section className={ styles.cart__total }>
+          <div className={ styles.cart_total__content }>
+            <span className={ styles.cart_total__header }>
+              Общая сумма:
+            </span>
+            <span className={ styles.cart_total__price }>
+              { RURub.format(cartTotalPrice) }
+            </span>
+          </div>
+          <div>
+            <button className={ styles.cart__total_btn }>
+              Оформить покупку
+            </button>
+          </div>
+        </section>
       </section>
     </>
   )

@@ -10,7 +10,7 @@
   }
 
   &__delete_item_btn {
-    color: rgb(10, 106, 166);
+    color: #2A7A94;
     background-color: transparent;
     font-size: 16px;
   }
@@ -60,6 +60,7 @@
       &_price {
         display: block;
         font-size: 16px;
+        transition: .3s;
       }
     }
   }
@@ -81,9 +82,12 @@
 
     &_count {
       display: block;
-      padding-left: 10px;
+      align-items: center;
+      padding-left: 12px;
       padding-right: 10px;
       font-size: 16px;
+      transition: .3s;
+      width: 31px;
     }
 
     &_subBtn {
@@ -96,5 +100,44 @@
     &_subBtn:not(:last-child) {
       margin-bottom: 5px;
     }
+  }
+
+  &__total {
+    float: right;
+    margin-top: 25px;
+    margin-bottom: 30px;
+  }
+
+  &__total_btn {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #2A7A94;
+    border-radius: 5px;
+    font-size: 16px;
+    float: right;
+    transition: .3s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &_total__header {
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: .3s;
+  }
+
+  &_total__content {
+    margin-bottom: 15px;
+  }
+
+  &_total__price {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(207, 37, 37);
+    transition: .3s;
   }
 }

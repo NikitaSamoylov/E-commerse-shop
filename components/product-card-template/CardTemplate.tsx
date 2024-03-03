@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import NextImage from 'next/image';
 import { IoIosHeartEmpty } from "react-icons/io";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
@@ -60,10 +61,11 @@ const CardTemplate: React.FC<ProductCardProp> = (
         }
         <div className={ styles.card__text }>
           <h3 className={ styles.card__price }>от { price } руб.</h3>
-          <MainBtn color='#E83131'
-            title='смотреть'
-            link={ `products/${ id }` }
-          />
+          <Link href={ `products/${ id }` }>
+            <MainBtn color='#E83131'
+              title='смотреть'
+            />
+          </Link>
           { sale || itemNew ?
             <>
               <Flex gap={ 13 } className={ styles.card__icons }>

@@ -19,11 +19,25 @@ export const cartSlice = createSlice({
         }
       })
     },
-    removeItems: (state, action) => {
+    removeItems: (state, action: PayloadAction<string[]>) => {
       return state.filter(el => !action.payload.includes(el.id))
-    }
+    },
+    increaseCount: (state, action: PayloadAction<string>) => {
+      return state.map(el =>
+        el.id.includes(action.payload) ?
+          { ...el, count: el.count + 1 } :
+          el
+      )
+    },
+    decreaseCount: (state, action: PayloadAction<string>) => {
+      return state.map(el =>
+        el.id.includes(action.payload) ?
+          { ...el, count: el.count - 1 } :
+          el
+      )
+    },
   },
 });
 
 
-export const { addItem, removeItems } = cartSlice.actions;
+export const { addItem, removeItems, increaseCount, decreaseCount } = cartSlice.actions;

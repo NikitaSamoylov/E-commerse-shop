@@ -7,7 +7,8 @@ export const defaultProduct = {
   price: 23999,
   brand: "realme",
   category: "смартфон",
-  inStock: false,
+  inStock: true,
+  count: 8,
   itemNew: true,
   images: [
     {

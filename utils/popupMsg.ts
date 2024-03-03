@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const notify = (): void => {
-  toast.success('Добавлено!', {
+export const notify = (msg = 'Добавлено'): void => {
+  toast.success(`${ msg }`, {
     position: "top-right",
     autoClose: 1500,
     hideProgressBar: true,

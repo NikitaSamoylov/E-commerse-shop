@@ -28,11 +28,12 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
   const dispatch = useAppDispatch();
 
   const [cartProduct, setCartProduct] = useState<TCart>({
-    id: defaultProduct.id + 1,
+    id: defaultProduct.id,
     name: defaultProduct.name,
     price: defaultProduct.price,
     itemImg: defaultProduct.images[0].image[0],
     count: 1,
+    maxCount: defaultProduct.count,
     color: defaultProduct.images[0].colorCode,
     colorName: defaultProduct.images[0].color,
     category: defaultProduct.category,
