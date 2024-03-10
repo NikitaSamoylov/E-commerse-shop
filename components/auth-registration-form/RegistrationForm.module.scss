@@ -1,0 +1,13 @@
+.form {
+
+  &__notify {
+    &_content {
+      padding-left: 10px;
+      line-height: 1.2;
+    }
+
+    &_link {
+      cursor: pointer;
+    }
+  }
+}

@@ -5,17 +5,12 @@ import { LuHeart } from "react-icons/lu";
 import { LuShoppingCart } from "react-icons/lu";
 import { RiUserLine } from "react-icons/ri";
 import { useAppSelector } from '@/hooks';
-import { notify } from '@/utils/popupMsg';
-import { ToastContainer } from 'react-toastify';
 import styles from './HeaderUserBtns.module.scss';
 import './userBtns_default.scss';
 import './favorites.png';
 
 const HeaderUserBtns: React.FC = () => {
   const cartItems = useAppSelector(state => state.cartItem);
-  const showMsg = () => {
-    notify('товары еще не добавлены')
-  };
 
   return (
     <ul className={ styles.userBtns }>

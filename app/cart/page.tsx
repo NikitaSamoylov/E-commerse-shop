@@ -11,17 +11,21 @@ import {
 } from 'react-transition-group';
 import { useState, useEffect } from 'react';
 import Img from 'next/image';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '@/hooks';
-import { notify } from '@/utils/popupMsg';
+import { notify } from '@/libs/utils/popupMsg';
 import { ToastContainer } from 'react-toastify';
 import { RURub } from '@/libs/utils/currency-intl';
 import { TCart } from '../../types/cart';
 import { removeItems } from '@/store/cart-slice/cart-reducer';
 import { increaseCount } from '@/store/cart-slice/cart-reducer';
 import { decreaseCount } from '@/store/cart-slice/cart-reducer';
+import { handleFormState } from '@/store/cart-slice/modalForm-reducer';
 import styles from './cart.module.scss';
 import './transition-group.scss';
+
+import { AuthModal } from '@/components/auth-modal/index';
 
 const CartPage: React.FC = () => {
   let [itemsOnRemove, setItemsOnRemove] = useState<string[]>([]);
@@ -104,6 +108,10 @@ const CartPage: React.FC = () => {
     )
   };
 
+  const handleFormOpen = () => {
+    dispatch(handleFormState())
+  };
+
   const cartLocalStore = useAppSelector(state => state.cartItem);
   const cartLocalStoreItems = cartLocalStore.map((cartItem: TCart) => {
     return (
@@ -141,8 +149,8 @@ const CartPage: React.FC = () => {
               </ConfigProvider>
               <Img
                 src={ cartItem.itemImg }
-                width={ 76 }
-                height={ 100 }
+                width={ 86 }
+                height={ 110 }
                 alt={ cartItem.name }
                 className={ styles.cart__img }
               />
@@ -151,7 +159,11 @@ const CartPage: React.FC = () => {
                   { cartItem.category }
                 </span>
                 <h3 className={ styles.cart__product_title }>
-                  { cartItem.name }
+                  <Link href={ `/products/${ cartItem.id }` }
+                    className={ styles.cart__product_link }
+                  >
+                    { cartItem.name }
+                  </Link>
                 </h3>
                 <span className={ styles.cart__product_price }>
                   { RURub.format(cartItem.price) }
@@ -225,6 +237,10 @@ const CartPage: React.FC = () => {
           </ConfigProvider>
           <button className={ styles.cart__delete_item_btn }
             onClick={ deleteItems }
+            disabled={ itemsOnRemove.length !== 0 ?
+              false :
+              true
+            }
           >
             {
               mainCheckbox ?
@@ -251,9 +267,12 @@ const CartPage: React.FC = () => {
             </span>
           </div>
           <div>
-            <button className={ styles.cart__total_btn }>
+            <button className={ styles.cart__total_btn }
+              onClick={ handleFormOpen }
+            >
               Оформить покупку
             </button>
+            <AuthModal/>
           </div>
         </section>
       </section>

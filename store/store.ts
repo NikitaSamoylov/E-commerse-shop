@@ -10,6 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { cartSlice } from "./cart-slice/cart-reducer";
+import { modalFormSlice } from "./cart-slice/modalForm-reducer";
 import persistStore from "redux-persist/es/persistStore";
 
 const persistConfig = {
@@ -18,7 +19,8 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  cartItem: cartSlice.reducer
+  cartItem: cartSlice.reducer,
+  modalForm: modalFormSlice.reducer,
 })
 
 const persistedReducer = persistReducer(

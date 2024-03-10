@@ -1,0 +1,36 @@
+.ant-input-outlined,
+.ant-input-outlined:hover,
+.ant-input-outlined:focus {
+  border: none;
+  border-bottom: 1px solid lightgray;
+  border-radius: 0;
+}
+
+.ant-form-item .ant-form-item-feedback-icon-success {
+  display: none;
+}
+
+ant-checkbox-wrapper.ant-checkbox-wrapper-in-form-item input[type="checkbox"] {
+  display: visible !important;
+  border-style: solid;
+  border: 1px solid grey;
+}
+
+.ant-input-affix-wrapper {
+  padding: 4px 7px;
+}
+
+a {
+  color: #2a7a94;
+}
+
+.ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  border-color: #fff;
+  border-style: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid red !important;
+}
+
+.ant-input-outlined:focus-within {
+  border-bottom: 1px solid lightgrey;
+}

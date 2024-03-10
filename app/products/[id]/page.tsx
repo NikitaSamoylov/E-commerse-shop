@@ -8,7 +8,7 @@ import { CiCircleRemove } from "react-icons/ci";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { useAppDispatch } from '@/hooks';
 import { addItem } from '@/store/cart-slice/cart-reducer';
-import { notify } from '../../../utils/popupMsg';
+import { notify } from '../../../libs/utils/popupMsg';
 import { ToastContainer } from 'react-toastify';
 import { defaultProduct } from './defaultProduct';
 import { RURub } from '@/libs/utils/currency-intl';
@@ -192,7 +192,7 @@ const Product: React.FC<IProductProps> = ({ params: { id } }) => {
                           onClick={ addToCart }
                         >
                           в корзину
-                          <ToastContainer />
+                          {/* <ToastContainer /> */}
                         </button>
                         <IoMdHeartEmpty size={ 23 }
                           color='red'

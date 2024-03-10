@@ -13,6 +13,11 @@
     color: #2A7A94;
     background-color: transparent;
     font-size: 16px;
+    transition: .3s;
+  }
+
+  &__delete_item_btn:disabled {
+    color: lightgrey;
   }
 
   &__img {
@@ -32,6 +37,14 @@
     &_title {
       font-size: 16px;
       margin-bottom: 5px;
+    }
+
+    &_link {
+      color: rgb(24, 24, 24);
+    }
+
+    &_link:hover {
+      color: #2A7A94;
     }
 
     &_price {

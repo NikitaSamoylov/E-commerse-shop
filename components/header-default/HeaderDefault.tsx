@@ -3,6 +3,7 @@ import { ModalDefault } from '../modal/index.js';
 import { SearchForm } from '../search-form/index.js';
 import { HeaderUserBtns } from '../header-actions-btns/index.js';
 import { Logo } from '../logo/index.js';
+import { ToastContainer } from 'react-toastify';
 import styles from './HeaderDefault.module.scss';
 
 const HeaderDefault: React.FC = () => {
@@ -21,6 +22,7 @@ const HeaderDefault: React.FC = () => {
         </div>
         <SearchForm />
         <HeaderUserBtns />
+        <ToastContainer />
       </div>
     </header>
   )
