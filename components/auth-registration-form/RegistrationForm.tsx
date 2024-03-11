@@ -18,8 +18,8 @@ import styles from './RegistrationForm.module.scss';
 
 const RegistrationForm: React.FC = () => {
 
-  const onFinish = (values: TUserSignUp) => {
-    sendUserSignupData(values)
+  const onFinish = async (values: any) => {
+    await sendUserSignupData(values)
       .then(() => notifySuccess('учётная запись создана'))
       .catch(e => notifyInfo(e.message))
   };

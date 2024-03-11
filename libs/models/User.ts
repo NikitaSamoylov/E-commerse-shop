@@ -19,8 +19,8 @@ const userSchema = new Schema(
       password: {
         type: String,
         required: [true, "придумайте пароль"],
-        minLength: [6, "пароль от 6 символов"],
-        select: false
+        // minLength: [6, "пароль от 6 символов"],
+        // select: false
       }
   },
   { timestamps: true }
