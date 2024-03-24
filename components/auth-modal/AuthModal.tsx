@@ -6,6 +6,7 @@ import { AuthForm } from '../auth-form/AuthForm';
 import { RegistrationForm } from '../auth-registration-form/RegistrationForm';
 
 import './AuthModal.module.scss';
+import './auth-modal-default.scss';
 
 const AuthModal: React.FC = () => {
   const modalFormStore = useAppSelector<boolean>(state => state.modalForm);
