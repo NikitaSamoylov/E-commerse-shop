@@ -35,6 +35,13 @@ const userSchema = new Schema(
     role: {
       type: String,
       default: 'user'
+    },
+    address: {
+      state: String,
+      region: String,
+      city: String,
+      street: String,
+      cityIndex: String,
     }
   },
   { timestamps: true }

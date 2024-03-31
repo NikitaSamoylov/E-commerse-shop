@@ -27,9 +27,14 @@ const RegistrationForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const [loadings, setLoadings] = useState<boolean>(false);
   const [confirmPass, setConfirmPass] = useState<boolean>(false);
+  const [userPassValue, setUserPassValue] = useState<string>('');
+
+  const setConfirmPassValue = (e:React.ChangeEvent) => {
+    setUserPassValue(e.target.value)
+  };
 
   const onFieldsChange = () => {
-    setConfirmPass(true)
+    setConfirmPass(true);
   };
 
   const onFinish = async (values: TUserSignUp) => {
@@ -37,9 +42,11 @@ const RegistrationForm: React.FC = () => {
     { 
       status === 'authenticated' && 
         (
-          await updateUserData(values, session?.user?.id)
+          await updateUserData(
+            values, session?.user?.id, values.email, values.password
+          )
             .then(() => notifySuccess('данные обновлены'))
-            .then(() => signInWithNewData(values))
+            .then(() => setUserPassValue(''))
             .then(() => {
               setLoadings(false)
             })
@@ -73,15 +80,6 @@ const RegistrationForm: React.FC = () => {
             })
         )
     }
-  };
-
-  const signInWithNewData = (values: any) => {
-    signIn("credentials", {
-      email: values.email.toLowerCase(),
-      password: values.password,
-      redirect: false,
-    });
-    setConfirmPass(false);
   };
 
   return (
@@ -231,7 +229,7 @@ const RegistrationForm: React.FC = () => {
                   initialValue={ session?.user ? session?.user?.phone : null }
                 >
                   <Input
-                    addonBefore='+7'
+                    prefix='+7'
                     placeholder='телефон'
                     minLength={ 10 }
                     type='tel'
@@ -249,8 +247,9 @@ const RegistrationForm: React.FC = () => {
                     >
                       <Input.Password
                         prefix={ <LockOutlined className="site-form-item-icon" /> }
-                        placeholder='пароль для подтверждения изменений'
+                        placeholder='пароль для изменений'
                         minLength={ 6 }
+                        onChange={ setConfirmPassValue }
                       />
                     </Form.Item>
                   )
@@ -261,6 +260,7 @@ const RegistrationForm: React.FC = () => {
                     className="login-form-button"
                     style={ { marginTop: '10px' } }
                     loading={ loadings }
+                    disabled={ userPassValue.length === 0 ? true : false }
                   >
                     обновить данные
                   </Button>

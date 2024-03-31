@@ -1,0 +1,59 @@
+.addresses {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  z-index: 3;
+  top: 35px;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 6px 0px rgba(34, 60, 80, 0.2);
+
+  &__item {
+    text-overflow: ellipsis;
+    padding: 7px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  &__item:not(:last-child) {
+    border-bottom: 1px solid lightgrey;
+  }
+
+  &__list {
+    width: 340px;
+  }
+
+  &__list_item {
+    font-size: 14px;
+    color: grey;
+    border-bottom: 1px dotted lightgrey;
+    width: 280px;
+    padding-left: 7px;
+  }
+
+  &__list_item:not(:last-child) {
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+  }
+
+  &__btn {
+    margin-top: 10px;
+    background-color: #2a7a94;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  &__btn:hover {
+    background-color: #2a7a94;
+  }
+
+  &__btn:disabled {
+    background-color: rgba(0, 0, 0, 0.04);
+    border: none;
+  }
+
+  &__btn:disabled:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border: none;
+  }
+}

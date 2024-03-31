@@ -9,7 +9,8 @@ export const POST = async (request: any) => {
     secondName,
     thirdName,
     email,
-    phone
+    phone,
+    address
   } = await request.json();
 
   await connect();
@@ -17,8 +18,6 @@ export const POST = async (request: any) => {
   const existingUser = await User.findOne({ _id: id });
 
   if (!existingUser) {
-    console.log(id)
-    console.log(existingUser)
     return NextResponse.json(
       { msg: "ошибка авторизации" },
       { status: 400 }
@@ -26,11 +25,13 @@ export const POST = async (request: any) => {
   }
 
   try {
-    await User.findOneAndUpdate({ _id: id }, { name, secondName, thirdName, phone, email }, {  
+    await User.findOneAndUpdate({ _id: id }, {
+      name, secondName, thirdName, phone, email, address
+    }, {  
       new: true
     })
     return NextResponse.json(
-      { msg: "имя пользователя обновлено" },
+      { msg: "данные обновлены" },
       { status: 200 }
     );
   } catch (err: any) {

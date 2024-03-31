@@ -1,3 +1,4 @@
+'use client';
 import { signIn } from 'next-auth/react'; 
 
 export const sendUserSignupData = async (values: any) => {
@@ -26,6 +27,14 @@ export const sendUserSignupData = async (values: any) => {
       ) {
           throw new Error('что-то пошло не так')
         }
+
+    if (response.ok) {
+      signIn("credentials", {
+        email: values.email.toLowerCase(),
+        password: values.password,
+        redirect: false,
+      });
+    }
   };
 
 export const checkUserSignInData = async (values: any) => {
@@ -40,7 +49,9 @@ export const checkUserSignInData = async (values: any) => {
   }
 };
 
-export const updateUserData = async (values: any, id: string) => {
+export const updateUserData = async (
+  values: any, id: string, email: string | undefined | null, confirmPass:string
+) => {
   const response = await fetch('/api/username-update', {
     method: 'POST',
     headers: {
@@ -48,11 +59,18 @@ export const updateUserData = async (values: any, id: string) => {
     },
     body: JSON.stringify({
       id,
-      name: values.name.toLowerCase(),
-      email: values.email.toLowerCase(),
-      secondName: values.secondName.toLowerCase(),
-      thirdName: values.thirdName.toLowerCase(),
-      phone: values.phone
+      name: values.name,
+      email: values.email,
+      secondName: values.secondName,
+      thirdName: values.thirdName,
+      phone: values.phone,
+      // address: {
+      //   state: values.state,
+      //   region: values.region,
+      //   city: values.city,
+      //   street: values.street,
+      //   cityIndex: values.cityIndex
+      // }
     })
   })
 
@@ -69,12 +87,59 @@ export const updateUserData = async (values: any, id: string) => {
 
   if (response.ok) {
     await signIn("credentials", {
-      email: values.email.toLowerCase(),
-      password: values.password,
+      email: email?.toLowerCase(),
+      password: confirmPass,
       redirect: false,
     })
   }
 };
+
+export const updateUserAddress = async (
+  values: any, id: string, email: string | undefined | null, confirmPass: string
+) => {
+  const response = await fetch('/api/username-update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id,
+      // name: values.name,
+      // email: values.email,
+      // secondName: values.secondName,
+      // thirdName: values.thirdName,
+      // phone: values.phone,
+      address: {
+        state: values.state,
+        region: values.region,
+        city: values.city,
+        street: values.street,
+        cityIndex: values.cityIndex
+      }
+    })
+  })
+
+  if (response.status === 400) {
+    throw new Error('не удалось обновить имя')
+  }
+
+  if (
+    response.status !== 200 &&
+    response.status !== 400
+  ) {
+    throw new Error('что-то пошло не так')
+  }
+
+  if (response.ok) {
+    await signIn("credentials", {
+      email: email?.toLowerCase(),
+      password: confirmPass,
+      redirect: false,
+    })
+  }
+};
+
+
 
 
 

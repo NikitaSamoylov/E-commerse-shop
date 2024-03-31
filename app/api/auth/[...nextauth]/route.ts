@@ -55,14 +55,20 @@ export const authOptions: any = {
     encryption: true,
   },
   callbacks: {
-    jwt: async ({ token, user, trigger }: { token:any, user:any, trigger:any }) => {
-      if (user || trigger === 'update') {
+    jwt: async ({ token, user }: { token:any, user:any }) => {
+      if (user) {
         token.username = user.username;
         token.secondName = user.secondName;
         token.thirdName = user.thirdName;
         token.id = user._id;
         token.role = user.role;
         token.phone = user.phone;
+        token.address = user.address;
+        // token.region = user.address.region;
+        // token.state = user.address.state;
+        // token.city = user.address.city;
+        // token.street = user.address.street;
+        // token.cityIndex = user.address.cityIndex;
       }
 
       return token;
@@ -75,6 +81,12 @@ export const authOptions: any = {
         session.user.id = token.id;
         session.user.role = token.role;
         session.user.phone = token.phone;
+        session.user.address = token.address;
+        // session.user.state = token.state;
+        // session.user.region = token.region;
+        // session.user.city = token.city;
+        // session.user.street = token.street;
+        // session.user.cityIndex = token.cityIndex;
       }
       return session;
     },
