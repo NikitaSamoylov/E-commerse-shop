@@ -1,0 +1,26 @@
+.addProduct {
+
+  &__container {
+    padding: 20px 30px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 11px -1px rgba(34, 60, 80, 0.22);
+    -moz-box-shadow: 0px 0px 11px -1px rgba(34, 60, 80, 0.22);
+    box-shadow: 0px 0px 11px -1px rgba(34, 60, 80, 0.22);
+    width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__title {
+    margin-bottom: 30px;
+  }
+
+  &__reset_btn {
+    background-color: #fff;
+    color: #2a7a94;
+    font-weight: 300;
+    font-size: 14px;
+    margin-left: 15px;
+    transform: translateY(-5px);
+  }
+}

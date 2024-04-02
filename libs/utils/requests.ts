@@ -64,13 +64,6 @@ export const updateUserData = async (
       secondName: values.secondName,
       thirdName: values.thirdName,
       phone: values.phone,
-      // address: {
-      //   state: values.state,
-      //   region: values.region,
-      //   city: values.city,
-      //   street: values.street,
-      //   cityIndex: values.cityIndex
-      // }
     })
   })
 
@@ -104,11 +97,6 @@ export const updateUserAddress = async (
     },
     body: JSON.stringify({
       id,
-      // name: values.name,
-      // email: values.email,
-      // secondName: values.secondName,
-      // thirdName: values.thirdName,
-      // phone: values.phone,
       address: {
         state: values.state,
         region: values.region,
@@ -136,6 +124,39 @@ export const updateUserAddress = async (
       password: confirmPass,
       redirect: false,
     })
+  }
+};
+
+export const addNewProduct = async (
+  values: any
+) => {
+  const response = await fetch('/api/add-product', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: values.name,
+      description: values.description,
+      price: values.price,
+      brand: values.brand,
+      category: values.category,
+      inStock: true,
+      quantity: values.quantity,
+      images: values.images,
+      reviews: values.reviews,
+    })
+  })
+
+  if (response.status === 400) {
+    throw new Error('не удалось обновить имя')
+  }
+
+  if (
+    response.status !== 200 &&
+    response.status !== 400
+  ) {
+    throw new Error('что-то пошло не так')
   }
 };
 

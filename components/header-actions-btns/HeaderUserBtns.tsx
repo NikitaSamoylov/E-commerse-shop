@@ -40,11 +40,11 @@ const HeaderUserBtns: React.FC = () => {
   session?.user?.role === 'admin' ?
     (items = [
       {
-        label: 'админка',
+        label: <Link href='/admin'>админка</Link>,
         key: '1',
       },
       {
-        label: 'мой аккаунт',
+        label: <Link href='/account'>мой аккаунт</Link>,
         key: '2',
       },
       {

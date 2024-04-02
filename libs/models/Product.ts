@@ -4,23 +4,23 @@ const { Schema } = mongoose;
 
 const productSchema = new Schema(
   {
-    _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
       required: [true, "введите название"],
       minLength: [2, "от 2 символов"],
-      maxLength: [30, "не больше 30 символов"]
+      maxLength: [58, "не больше 58 символов"]
     },
     description: {
       type: String,
+      required: [true, "введите название"],
       minLength: [2, "от 2 символов"],
-      maxLength: [1645, "слишком большой текст"]
+      maxLength: [1050, "слишком большой текст"]
     },
     price: {
-      type: Number,
+      type: String,
       required: [true, "введите цену"],
       minLength: [1, "от 1 символа"],
-      maxLength: [11, "не больше 11 символов"]
+      maxLength: [12, "не больше 12 символов"]
     },
     brand: {
       type: String,
@@ -39,7 +39,7 @@ const productSchema = new Schema(
       type: Boolean,
     },
     quantity: {
-      type: Number,
+      type: String,
       required: [true, "какое количество товара в наличии?"],
       minLength: [1, "от 1 символа"],
     },

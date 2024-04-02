@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Flex } from 'antd';
+import { JSX } from 'react/jsx-runtime';
 import styles from './AdminNavItem.module.scss';
 
 type TAdminNavItemProps = {
@@ -17,7 +18,7 @@ const AdminNavItem: React.FC<TAdminNavItemProps> = (
   const isActive = (path:string) => path === pathname;
 
   return (
-    <li>
+    <li className={ styles.adminNav__item }>
       <Link href={ link }
         className={ 
           isActive(link) ? 
@@ -29,9 +30,9 @@ const AdminNavItem: React.FC<TAdminNavItemProps> = (
           justify='flex-start'
         >
           { icon }
-          <h3 className={styles.adminNav__title}>
+          <h4 className={styles.adminNav__title}>
             { title }
-          </h3>
+          </h4>
         </Flex>
       </Link>
     </li>

@@ -2,5 +2,11 @@
 
   &__section {
     margin-bottom: 12px;
+    border-right: 1px solid lightgrey;
+    padding-right: 10px;
+  }
+
+  &__list {
+    width: 180px;
   }
 }
