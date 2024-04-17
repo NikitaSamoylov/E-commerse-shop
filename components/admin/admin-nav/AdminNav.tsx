@@ -17,9 +17,9 @@ const AdminNav:React.FC = () => {
       link: '/admin/add-product' 
     },
     { 
-      title: 'продукты', 
+      title: 'все продукты', 
       icon: <LuLayoutList />, 
-      link: '/admin/products' 
+      link: '/admin/all-products' 
     },
     { 
       title: 'заказы', 

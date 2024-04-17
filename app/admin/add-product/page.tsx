@@ -1,38 +1,74 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Form,
   Input,
   ConfigProvider,
-  Checkbox,
   Flex,
-  InputNumber,
   Space,
-  Popconfirm
+  Popconfirm,
+  ColorPicker,
+  ColorPickerProps
 } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { addNewProduct } from '@/libs/utils/requests';
-import styles from './AddProduct.module.scss';
+import { UploadImg } from '@/app/upload/page';
 import { notifyInfo, notifySuccess } from '@/libs/utils/popupMsg';
+import { redirect } from 'next/navigation';
+import styles from './AddProduct.module.scss';
 
 const { TextArea } = Input;
 
 const AddProduct:React.FC = () => {
   const { data: session, status } = useSession();
+  const [imgUrls, setImgUrls] = useState<any[]>([]);
+  const [productColor, setProductColor] = useState<ColorPickerProps['value']>('#dddee0');
+
+  useEffect(() => {
+    if (
+      status !== 'authenticated' &&
+      session?.user?.role !== 'admin'
+    ) {
+      redirect('/');
+    } 
+  }, [status]);
+
+  const setProductImgUrl = (url: any) => {
+    setImgUrls(imgUrls => [...imgUrls, url])
+  };
+
+  const deleteProductImgUrl = (url: string) => {
+    setImgUrls(imgUrls => imgUrls.filter(el => !el.match(url)))
+  };
+
   const [loadings, setLoadings] = useState<boolean>(false);
 
   const [form] = useForm();
 
   const onFinish = async (values: any) => {
     setLoadings(true);
+    const preparedProduct = await {
+      ...values, 
+      images: [
+        {
+          color: values.productColor,
+          colorCode: productColor,
+          image: [
+            ...imgUrls
+          ]
+        }
+      ]
+    };
 
-    await addNewProduct(values)
+    await addNewProduct(preparedProduct)
       .then(() => {
         notifySuccess('продукт добавлен');
         setLoadings(false);
         onReset();
+        setProductColor('#dddee0');
+        setImgUrls([])
       })
       .catch(() => {
         notifyInfo('что-то пошло не так');
@@ -142,6 +178,31 @@ const AddProduct:React.FC = () => {
               />
             </Form.Item>
           </Flex>
+            <UploadImg
+              setProductImgUrl={ setProductImgUrl }
+              deleteProductImgUrl={ deleteProductImgUrl }
+            />
+          <Flex
+            justify='space-between'
+            style={{ marginTop: '15px' }}
+          >
+            <ColorPicker defaultValue="#1677ff"
+              showText
+              onChangeComplete={ 
+                (color) => setProductColor(color.toHexString())
+              }
+              value={ productColor }
+            />
+            <Form.Item
+              name={ 'productColor' }  
+              style={{ width: '80%' }}  
+            >
+              <Input placeholder={ 'цвет' }
+                minLength={ 1 }
+                allowClear
+              />
+            </Form.Item>
+          </Flex>
           <Flex
             align='center'
           >
@@ -153,6 +214,7 @@ const AddProduct:React.FC = () => {
                   marginTop: '15px', marginBottom: 0
                 } }
                 loading={ loadings }
+                disabled={ imgUrls.length === 0 ? true : false }
               >
                 добавить новый продукт
               </Button>
@@ -166,7 +228,6 @@ const AddProduct:React.FC = () => {
               <Button
                 className={ styles.addProduct__reset_btn }
                 htmlType="button"
-                // onClick={ onReset }
               >
                 сбросить форму
               </Button>

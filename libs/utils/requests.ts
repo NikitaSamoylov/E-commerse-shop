@@ -136,11 +136,11 @@ export const addNewProduct = async (
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      name: values.name,
+      name: values.name.toLowerCase(),
       description: values.description,
       price: values.price,
-      brand: values.brand,
-      category: values.category,
+      brand: values.brand.toLowerCase(),
+      category: values.category.toLowerCase(),
       inStock: true,
       quantity: values.quantity,
       images: values.images,
@@ -158,6 +158,21 @@ export const addNewProduct = async (
   ) {
     throw new Error('что-то пошло не так')
   }
+};
+
+export const getAllProducts = async () => {
+
+  try {
+    const response = await fetch('/api/get-all-products');
+
+    if (!response.ok) {
+      throw new Error('ошибка получения данных')
+    }
+
+    return response.json();
+  } catch(e) {
+      console.log(e)
+    }
 };
 
 

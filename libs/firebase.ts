@@ -1,14 +1,14 @@
 import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBlAvcxklfCFkWZYiHm78PfbRUvoXMf2Ts",
-  authDomain: "testproj-b8a80.firebaseapp.com",
-  projectId: "testproj-b8a80",
-  storageBucket: "testproj-b8a80.appspot.com",
-  messagingSenderId: "483276498748",
-  appId: "1:483276498748:web:0377c1912ea6d41371a039"
+  apiKey: "AIzaSyCIzOYLISyfIIJqPdcvxaSA3920FJS7PD4",
+  authDomain: "electronixdb.firebaseapp.com",
+  projectId: "electronixdb",
+  storageBucket: "electronixdb.appspot.com",
+  messagingSenderId: "924643025041",
+  appId: "1:924643025041:web:c994779b945c724ac19f30"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
-
-export default firebaseApp;
+const app = initializeApp(firebaseConfig);
+export const ImgStorage = getStorage(app);

@@ -9,8 +9,6 @@ export const POST = async (request: any) => {
 
   await connect();
 
-console.log('connected new product')
-
   const newProduct = new Product({
     name,
     description,
@@ -19,8 +17,8 @@ console.log('connected new product')
     category,
     inStock,
     quantity,
-    // images,
-    // reviews
+    images,
+    reviews
   });
 
   try {
