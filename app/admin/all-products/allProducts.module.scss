@@ -1,0 +1,35 @@
+.products {
+
+  &__list {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-bottom: 1px solid lightgrey;
+    padding: 5px;
+  }
+
+  &__item {
+    max-width: 250px;
+    padding: 0 5px;
+  }
+
+  &__btn {
+    background-color: transparent;
+  }
+
+  &__btn:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+.allProducts {
+  width: 100%;
+  padding-left: 35px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__title {
+    margin-bottom: 25px;
+  }
+}

@@ -161,18 +161,23 @@ export const addNewProduct = async (
 };
 
 export const getAllProducts = async () => {
-
-  try {
     const response = await fetch('/api/get-all-products');
 
     if (!response.ok) {
       throw new Error('ошибка получения данных')
-    }
+    };
 
     return response.json();
-  } catch(e) {
-      console.log(e)
-    }
+};
+
+export const deleteProduct = async (_id: string) => {
+  const response = await fetch(`/api/delete-product?id=${_id}`, { method: 'DELETE' });
+
+  if (!response.ok) {
+    throw new Error('ошибка удаления продукта')
+  };
+
+  return response.json();
 };
 
 

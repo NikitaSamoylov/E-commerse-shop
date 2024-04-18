@@ -1,22 +1,10 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getAllProducts } from '@/libs/utils/requests';
-import { TNewProducts } from '@/types/catalog';
-import { SearchOutlined } from '@ant-design/icons';
-import type { InputRef, TableColumnsType, TableColumnType } from 'antd';
-import { Button, Input, Space, Table } from 'antd';
-import type { FilterDropdownProps } from 'antd/es/table/interface';
-import Highlighter from 'react-highlight-words';
+import { RiEditLine } from "react-icons/ri";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { deleteProduct } from '@/libs/utils/requests';
 import styles from './allProducts.module.scss';
-
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-};
-
-type DataIndex = keyof DataType;
 
 const AllProducts:React.FC = () => {
   const [products, setProducts] = useState([]);
@@ -24,53 +12,51 @@ const AllProducts:React.FC = () => {
   useEffect(() => {
     getAllProducts()
       .then((data) => { setProducts(data) })
-  }, []);
+  }, [products]);
 
-  // const productsData = () => {
-    products.map((el, i) => {
-      // return {
-      //   key: i,
-      //   name: el.name,
-
-      console.log(el['name'])
-      // }
-    })
-  // };
-
-  const data: DataType[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Joe Black',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Jim Green',
-      age: 32,
-      address: 'Sydney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-    },
-  ];
+  const onProductRemove = (_id: string) => {
+    deleteProduct(_id)
+  };
 
   return (
-    <section>
-      <h3>
+    <section className={ styles.allProducts }>
+      <h3 className={ styles.allProducts__title }>
         Всего продуктов: { Array.from(products).length }
       </h3>
       <div>
-
+        { 
+          products.map(el => {
+            return (
+            <>
+              <div className={ styles.products__list }>
+                <span className={ styles.products__item }>
+                  { el['name'] }
+                </span>
+                <span className={ styles.products__item }>
+                  { el['category'] }
+                </span>
+                <span className={ styles.products__item }>
+                  { el['price'] }
+                </span>
+                <div>
+                  <button className={ styles.products__btn }>
+                    <RiEditLine 
+                      size={ 16 } 
+                      color='#2A7A94'
+                      style={{ position: 'relative', top: 1 }}
+                    />
+                  </button>
+                  <button className={ styles.products__btn }
+                      onClick={ () => onProductRemove(el['_id']) }
+                  >
+                    <FaRegTrashCan size={ 15 } color='#2A7A94'/>
+                  </button>
+                </div>
+              </div>
+            </>
+            )
+          })
+        }
       </div>
     </section>
   )
